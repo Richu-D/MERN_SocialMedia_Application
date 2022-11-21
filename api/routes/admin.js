@@ -1,10 +1,10 @@
-import express from "express";
-import { admin } from "../controllers/controllers.js";
+const express = require("express")
+const { admin } = require("../controllers/controllers.js")
 
 const adminRouter = express.Router()
 
-adminRouter.get("/",admin)
+// adminRouter.get("/",admin)
 
-export default adminRouter
+module.exports = adminRouter
 
 
