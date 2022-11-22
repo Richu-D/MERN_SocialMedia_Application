@@ -67,7 +67,11 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    friends: {
+    isPrivate: {
+      type: Boolean,
+      default: false,
+    },
+    posts: {
       type: Array,
       default: [],
     },

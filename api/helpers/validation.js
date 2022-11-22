@@ -7,7 +7,7 @@ const validateEmail = (email) => {
       .match(/^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,12})(\.[a-z]{2,12})?$/);
   };
  const validateLength = (text, min, max) => {
-    if (text.length > max || text.length < min) {
+    if (text.trim().length > max || text.trim().length < min) {
       return false;
     }
     return true;
@@ -15,7 +15,6 @@ const validateEmail = (email) => {
 
  const validateUsername = async (username) => {
    let check = await User.findOne({ username });
-   console.log("Richu",check);
   if(check!=null){
     return true;
   }else{
