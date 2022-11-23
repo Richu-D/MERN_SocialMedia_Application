@@ -47,6 +47,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "gender is required"],
       trim: true,
+      enum: ["male", "female", "other"]
     },
     bYear: {
       type: Number,
@@ -75,6 +76,14 @@ const userSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    Posts: [
+      {
+        post: {
+          type: ObjectId,
+          ref: "Post",
+        }
+      }
+    ],
     following: {
       type: Array,
       default: [],
