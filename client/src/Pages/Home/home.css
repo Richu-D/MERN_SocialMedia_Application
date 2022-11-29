@@ -1,0 +1,32 @@
+.home-body{
+    position: relative;
+    top: 100px;
+    display: flex;
+
+}
+
+.left-home{
+    background-color: red;
+    flex:1;
+}
+
+.left-home-content{
+    position: sticky;
+    top:100px;
+}
+
+.center-home{
+    background-color: orange;
+    flex:3;
+    
+}
+
+.right-home{
+    background-color: green;
+    flex:1;
+}
+
+.right-home-content{
+    position: sticky;
+    top:100px;
+}
