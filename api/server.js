@@ -4,13 +4,16 @@ const cors = require("cors")
 const express = require("express")
 const adminRouter = require("./routes/admin.js")
 const usersRouter = require("./routes/users.js")
+const fileUpload = require("express-fileupload")
 const PORT = process.env.PORT || 5000
 const app = express()
 console.clear()
-
+ 
 app.use(cors())
 
 app.use(express.json());
+
+app.use(fileUpload());
 
 app.use("/users",usersRouter)
 

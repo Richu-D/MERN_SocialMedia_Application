@@ -64,6 +64,10 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
     verified: {
       type: Boolean,
       default: false,
@@ -93,6 +97,10 @@ const userSchema = mongoose.Schema(
       default: [],
     },
     requests: {
+      type: Array,
+      default: [],
+    },
+    blockedPeople: {
       type: Array,
       default: [],
     },

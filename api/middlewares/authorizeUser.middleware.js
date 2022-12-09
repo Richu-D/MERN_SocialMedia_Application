@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-exports.authUser = async (req, res, next) => {
+const authorizeUser = async (req, res, next) => {
 
   try {
     let token = req.header("Authorization")
@@ -12,10 +12,13 @@ exports.authUser = async (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) return res.status(401).json({ message: "Invalid Authentification" });
       req.user = user;
+      console.log("Current User :",user.id);
       next();
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
+module.exports = authorizeUser;
 

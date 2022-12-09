@@ -3,7 +3,9 @@ const express = require("express")
 
 const adminRouter = express.Router()
 
-// adminRouter.get("/",admin)
+adminRouter.get("/login",(req,res)=>{
+    res.send("hyy")
+})
 
 module.exports = adminRouter
 

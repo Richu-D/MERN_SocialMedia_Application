@@ -2,6 +2,9 @@
 const nodemailer =  require("nodemailer")
 const {google} =  require("googleapis")
 
+try {
+  
+
 const oauth_link = "https://developers.google.com/oauthplayground";
 
 const { OAuth2 } = google.auth;
@@ -41,6 +44,9 @@ const sendVerificationEmail = async (email, name, url) => {
       return res;
     });
   };
-  
   module.exports = sendVerificationEmail
+} catch (error) {
+  console.log(error);
+}
+  
   
