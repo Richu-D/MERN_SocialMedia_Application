@@ -152,3 +152,8 @@ header {
     font-size: 13px;
     color: #fff;
   }
+
+  .active_link{
+    background: var(--light-blue-color);
+    color: var(--blue-color);
+  }

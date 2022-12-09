@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import useClickOutside from "../../helpers/clickOutside"
 
 const RegisterForm = ({setVisible}) => {
@@ -14,7 +13,6 @@ const RegisterForm = ({setVisible}) => {
     setVisible(false)
   })
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const usernameError = useRef()
 
@@ -75,16 +73,6 @@ const RegisterForm = ({setVisible}) => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-//   "first_name":formik.values.first_name,
-//   "last_name":formik.values.last_name,
-//   "email":formik.values.email,
-//     "username":formik.values.username,
-//     "password":formik.values.password,
-//     "bYear":formik.values.bYear,
-//     "bMonth":formik.values.bMonth,
-//     "bDay":formik.values.bDay,
-//     "gender":formik.values.gender,
-
   const registerSubmit = async () => {
     try {
       const { data } = await axios.post(
@@ -95,12 +83,12 @@ const RegisterForm = ({setVisible}) => {
       setSuccess(data.message);
       const { message, ...rest } = data;
 
-      dispatch({ type: "LOGIN", payload: rest });
-      localStorage.setItem("user",JSON.stringify(rest))
-
+      
       setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+        dispatch({ type: "LOGIN", payload: rest });
+        localStorage.setItem("user",JSON.stringify(rest))
+        // navigate("/");
+      }, 1000);
     } catch (error) {
         console.log("Error");
       setLoading(false);
@@ -176,7 +164,7 @@ const RegisterForm = ({setVisible}) => {
                   Date of birth 
                 </div>
                 <div className="reg_grid">
-                  <select name="bDay">
+                  <select name="bDay" value={formik.values.bDay} onChange={formik.handleChange}>
                   {days.map((day, i) => (
                       <option key={i} 
                       value={day} 
@@ -185,14 +173,14 @@ const RegisterForm = ({setVisible}) => {
                       </option>
                     ))}
                   </select>
-                  <select name="bMonth">
+                  <select name="bMonth" value={formik.values.bMonth} onChange={formik.handleChange} >
                     {months.map((month, i) => (
                       <option value={month} key={i}>
                         {month}
                       </option>
                     ))}
                   </select>
-                  <select name="bYear" >
+                  <select name="bYear" value={formik.values.bYear} onChange={formik.handleChange}>
                     {years.map((year, i) => (
                       <option value={year} key={i}>
                         {year}

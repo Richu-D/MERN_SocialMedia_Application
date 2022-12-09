@@ -1,32 +1,43 @@
 .home-body{
     position: relative;
-    top: 100px;
+    top: 80px;
     display: flex;
 
 }
 
 .left-home{
-    background-color: red;
-    flex:1;
+    /* background-color: red; */
+    flex:2;
 }
 
 .left-home-content{
     position: sticky;
-    top:100px;
+    top:80px;
 }
 
 .center-home{
-    background-color: orange;
-    flex:3;
-    
+    flex:5;
+    margin:0 25px;
 }
 
 .right-home{
-    background-color: green;
-    flex:1;
+    /* background-color: green; */
+    flex:2;
 }
 
 .right-home-content{
     position: sticky;
-    top:100px;
+    top:80px;
+}
+
+.createPost{
+    margin-bottom: 10px;
+}
+
+.no-posts{
+    display: flex;
+    justify-content: center;
+    color:#65676b;
+    margin-top:20px;
+    font-weight: 400;
 }

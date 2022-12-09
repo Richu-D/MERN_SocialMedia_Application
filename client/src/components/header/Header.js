@@ -9,11 +9,15 @@ import {
   Notifications,
   Search,
 } from "../../svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useInstance from "../../axios/axiosInstance.js";
 
 
- const Header = () => {
+ const Header = ({page}) => {
+  let instance = useInstance()
   const { user } = useSelector((user) => ({ ...user }));
+  console.log(user);
+  const dispatch = useDispatch()
   
   const color = "#65676b";
   return (
@@ -23,7 +27,7 @@ import { useSelector } from "react-redux";
           <div className="logo-container">
             <img src={Logo} alt="" />
           </div>
-        </Link>
+        </Link> 
         <div className="search search1">
           <Search color={color} />
           <input
@@ -34,7 +38,7 @@ import { useSelector } from "react-redux";
         </div>
       </div>
       <div className="header_middle">
-        <Link to="/" className="middle_icon active">
+        <Link to="/" className={`middle_icon ${page === "home" ? "active" : "" } `}>
           <i className="fa-solid fa-house-user" style={{color:"#5ba95b",fontSize:"25px"}}/>
           {/* <HomeActive /> */}
         </Link>
@@ -56,9 +60,9 @@ import { useSelector } from "react-redux";
         </Link>
       </div>
       <div className="header_right">
-      <Link to="/profile" className="profile_link hover1">
-          <img src={(user?.profile)? user?.profile :default_profile} alt="Profile" />
-          <span>{user?.first_name || "undifined"}</span>
+      <Link to="/profile" className={`profile_link hover1 ${page === "profile" ? "active_link" : ""}`}>
+          <img src={user?.picture ||default_profile} alt="Profile" />
+          <span>{user?.first_name}</span>
         </Link>
         <div className="circle_icon hover1">
           <Menu />
@@ -71,7 +75,14 @@ import { useSelector } from "react-redux";
           <Notifications />
           <div className="right_notification">8</div>
         </div>
-        <div className="circle_icon hover1">
+        <div className="circle_icon hover1"  onClick={async ()=>{
+
+           await instance.patch("/logout")
+            localStorage.setItem("user",null)
+            dispatch({
+              type:"LOGOUT"
+            })
+        }}>
           <ArrowDown />
         </div>
       </div>

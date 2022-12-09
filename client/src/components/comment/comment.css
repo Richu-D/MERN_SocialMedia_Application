@@ -1,0 +1,23 @@
+.comment_box{
+  margin: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.commenter_header{
+ display: flex;
+ justify-content: space-between;
+}
+.commenter_profile{
+    display: flex;
+    width: 15rem;
+    justify-content: space-around;
+    align-items: center;
+}
+.commenter_profile img{
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.commenter_details{
+
+}
