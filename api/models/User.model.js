@@ -76,10 +76,6 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    posts: {
-      type: Array,
-      default: [],
-    },
     Posts: [
       {
         post: {
@@ -116,9 +112,6 @@ const userSchema = mongoose.Schema(
       bio: {
         type: String,
       },
-      otherName: {
-        type: String,
-      },
       job: {
         type: String,
       },
@@ -140,10 +133,7 @@ const userSchema = mongoose.Schema(
       relationship: {
         type: String,
         enum: ["Single", "In a relationship", "Married", "Divorced"],
-      },
-      instagram: {
-        type: String,
-      },
+      }
     },
     savedPosts: [
       {

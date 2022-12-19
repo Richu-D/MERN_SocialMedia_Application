@@ -1,5 +1,5 @@
 // const User =  require('../models/User.model.js')
-const refreshTokenList = require("../models/refreshToken.model.js")
+const refreshTokenList = require("../../models/refreshToken.model.js")
 
 const logout = async (req,res) => {
     try {

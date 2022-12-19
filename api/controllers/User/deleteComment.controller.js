@@ -1,4 +1,4 @@
-const Post = require("../models/Post.model.js")
+const Post = require("../../models/Post.model.js")
 
 const deleteComment=async (req, res) => {
     try {

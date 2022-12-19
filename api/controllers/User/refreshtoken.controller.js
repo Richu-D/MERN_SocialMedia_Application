@@ -1,6 +1,6 @@
-const refreshTokenList = require("../models/refreshToken.model.js")
+const refreshTokenList = require("../../models/refreshToken.model.js")
 const jwt = require("jsonwebtoken");
-const generateToken = require("../helpers/token.helper.js");
+const generateToken = require("../../helpers/token.helper.js");
 
 const refreshToken = async (req,res) => {
     try {
@@ -17,7 +17,7 @@ const refreshToken = async (req,res) => {
       if(!user) return res.status(400).json({ message: "No user found" });
       
       let {refreshTokens} = user;
-     if(!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+     if(!refreshTokens.includes(refreshToken)) return res.status(403).json({ message: "User Logout" });
 
      const token = generateToken({ id: userId },process.env.TOKEN_SECRET, "20s");
 
@@ -25,7 +25,7 @@ const refreshToken = async (req,res) => {
 
     } catch (error) {
       console.log(error.stack);
-      res.status(500).json({ message: error.message });
+      res.json({ message: error.message });
     }
   }
   

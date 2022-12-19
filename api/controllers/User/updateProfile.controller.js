@@ -1,23 +1,19 @@
-const PostSchema = require("../models/Post.model.js")
-const UserSchema = require("../models/User.model.js")
-const storage = require("../firebase/config.js")
+const PostSchema = require("../../models/Post.model.js")
+const UserSchema = require("../../models/User.model.js")
+const storage = require("../../firebase/config.js")
 const { v4 } = require("uuid")
-const createPost = async (req,res) =>{ 
+const updateProfile = async (req,res) =>{ 
 // console.log(req.user);
     try {
-        console.log(req.body);
-    //  
-
 const file = req?.files?.image?.data
 if(file){
 const fileId = v4();
-let storageRef = storage.ref(`/items/${fileId}`)
+let storageRef = storage.ref(`/profile/${fileId}`)
 storageRef.put(file,{
   contentType: req.files.image.mimetype
-}).then(() => storageRef.getDownloadURL()) // after upload, obtain the download URL
+}).then(() => storageRef.getDownloadURL()) 
 .then(
   (url) => {
-    // persisted to storage successfully and obtained download URL
     let post =  PostSchema({
               user:req.user.id,
               image:url,
@@ -25,13 +21,15 @@ storageRef.put(file,{
           })
           post.save(async (err,result)=>{
               if(err) return console.log("err",err)
-              console.log("user",result._id);
               await UserSchema.updateOne( {"_id":req.user.id}, { $push: { posts: result._id} })
+              await UserSchema.updateOne( {"_id":req.user.id}, { $set: { "picture": url} })
+              console.log(url);
           })
     res
       .status(201)
       .json({
-        "message": "Upload successful"
+        "message": "Upload successful",
+        "picture":url
       });
   },
   (err) => {
@@ -65,18 +63,6 @@ res
       console.log(error);
     }
   }
-    // uploadTask.on(
-    //   "state_changed",
-    //   (error) => {
-    //     console.log("Err Richu",error);
-    //   },
-    //  async () => {
-    // await uploadTask.snapshot.ref.getDownloadURL().then(async(url) => {
-    //     console.log("url is ",url);
-    //   }
-    //   )
-    // }
-    // )
     
      }  catch (error) {
         console.log (error)
@@ -86,6 +72,4 @@ res
 
 
 
-module.exports ={
-    createPost
-} ;
+module.exports = updateProfile

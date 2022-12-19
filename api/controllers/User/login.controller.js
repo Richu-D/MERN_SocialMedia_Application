@@ -1,12 +1,14 @@
-const User =  require('../models/User.model.js')
+const User =  require('../../models/User.model.js')
 const bcrypt = require("bcrypt")
-const generateToken = require('../helpers/token.helper.js')
+const generateToken = require('../../helpers/token.helper.js')
 const sanitize = require('mongo-sanitize');
 
-const refreshTokenList = require("../models/refreshToken.model.js")
+const refreshTokenList = require("../../models/refreshToken.model.js")
+
 
 const login = async (req, res) => {
     try {
+
       const email = sanitize(req.body.email);
       const password = req.body.password;
       const user = await User.findOne({ email });
@@ -29,7 +31,8 @@ const login = async (req, res) => {
         token,
         refreshToken,
         verified: user.verified,
-        isBlocked:user.isBlocked
+        isBlocked:user.isBlocked,
+        isPrivate:user.isPrivate
       });
     } catch (error) {
       res.status(500).json({ message: error.message });

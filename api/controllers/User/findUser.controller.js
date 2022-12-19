@@ -1,13 +1,17 @@
-const User =  require('../models/User.model.js')
+const User =  require('../../models/User.model.js')
 
 
-const getProfile = async (req, res) => {
+const findUser = async (req, res) => {
     try {
-      const {username} = req.params;
+      const {email,Username} = req.query;
   
-      if (!username) return res.status(400).json({ message: "No username  is provided to search user" });
+      const isvalidQuery = email || Username
   
-      let user = await User.findOne( {"username":username} ).select(["-password","-requests","-search","-savedPosts"]);
+      if (!isvalidQuery) return res.status(400).json({ message: "No email or username  is provided to search user" });
+  
+      const searchUser = (email)? {"email":email} : {"username":Username}
+  
+      let user = await User.findOne( searchUser ).select(["-password","-requests","-search","-savedPosts"]);
   
       if (!user || !user.verified) return res.status(404).json({ message: "Account does not exists." });
   
@@ -34,4 +38,4 @@ const getProfile = async (req, res) => {
     }
   };
 
-  module.exports = getProfile;
+  module.exports = findUser;

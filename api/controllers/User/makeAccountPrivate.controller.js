@@ -1,4 +1,4 @@
-const User =  require('../models/User.model.js')
+const User =  require('../../models/User.model.js')
 
 const makeAccountPrivate = async (req,res) => {
     try {

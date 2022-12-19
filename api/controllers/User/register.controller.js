@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt")
-const refreshTokenList = require("../models/refreshToken.model.js")
+const refreshTokenList = require("../../models/refreshToken.model.js")
 // model
-const User =  require('../models/User.model.js')
+const User =  require('../../models/User.model.js')
 
 // helpers
-const { validateEmail, validateLength, validateUsername } =  require('../helpers/validation.helper.js')
-const  sendVerificationEmail = require('../helpers/mailer.helper.js')
-const generateToken = require('../helpers/token.helper.js')
+const { validateEmail, validateLength, validateUsername } =  require('../../helpers/validation.helper.js')
+const  sendVerificationEmail = require('../../helpers/mailer.helper.js')
+const generateToken = require('../../helpers/token.helper.js')
 
 
 const register = async (req,res)=>{
@@ -115,6 +115,7 @@ const register = async (req,res)=>{
             last_name: user.last_name,
             token: token,
             verified: user.verified,
+            isPrivate:user.isPrivate,
             message: "Register Success ! please check your email to activate account",
           });
 

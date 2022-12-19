@@ -1,5 +1,5 @@
-const Post =  require('../models/Post.model.js')
-const NotificationModel =  require('../models/Notification.model.js')
+const Post =  require('../../models/Post.model.js')
+const NotificationModel =  require('../../models/Notification.model.js')
 
 const likeAndUnlike = async (req,res) => {
     try {

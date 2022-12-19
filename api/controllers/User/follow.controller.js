@@ -1,4 +1,4 @@
-const User =  require('../models/User.model.js')
+const User =  require('../../models/User.model.js')
 // need private account implementation
 const follow = async (req,res) => {
     try {

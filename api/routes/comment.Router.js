@@ -1,7 +1,7 @@
 const express = require("express");
-const addComment = require("../controllers/addComment.controller.js");
-const getCommenterInfo = require("../controllers/getCommenterInfo.controller.js");
-const deleteComment = require("../controllers/deleteComment.controller.js");
+const addComment = require("../controllers/User/addComment.controller.js");
+const getCommenterInfo = require("../controllers/User/getCommenterInfo.controller.js");
+const deleteComment = require("../controllers/User/deleteComment.controller.js");
 
 
 const commentRouter = express.Router();

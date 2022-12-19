@@ -1,6 +1,6 @@
-const User =  require('../models/User.model.js')
-const generateToken = require('../helpers/token.helper.js')
-const  sendVerificationEmail = require('../helpers/mailer.helper.js')
+const User =  require('../../models/User.model.js')
+const generateToken = require('../../helpers/token.helper.js')
+const  sendVerificationEmail = require('../../helpers/mailer.helper.js')
 
 const resendVerification = async (req, res) => {
     try {

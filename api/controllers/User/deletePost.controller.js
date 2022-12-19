@@ -1,6 +1,7 @@
-const Post =  require('../models/Post.model.js')
+const Post =  require('../../models/Post.model.js')
+const User =  require('../../models/User.model')
 
-const storage = require("../firebase/config.js")
+const storage = require("../../firebase/config.js")
 
 const deletePost = async (req,res) => {
     try {
@@ -17,6 +18,7 @@ const deletePost = async (req,res) => {
             let pictureRef = storage.refFromURL(post?.image);
            await pictureRef.delete()
               .then(async() => {
+                await User.updateOne( {"_id":req.user.id}, { $pull: { posts: postId} })
                  await Post.deleteOne({_id:postId})
                  res.status(200).json({"status":true,"message":"Post Deleted Successfully"})
                 })
