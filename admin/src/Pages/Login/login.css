@@ -1,0 +1,44 @@
+.login_wrap{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.login_wrap form {
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+}
+.input_wrap input{
+    width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgb(51, 51, 252);
+  font-size: 1rem;
+}
+
+.login_wrap form button {
+   padding: 10px 25px;
+   align-self: center;
+   border: none;
+   color:white;
+   background-color: rgb(51, 51, 252);
+   border-radius: 10px;
+}
+
+.login_wrap form button:hover {
+    background-color: blue;
+}
+
+.field-validation-Error{
+    color: red;
+    font-size: .9rem;
+}

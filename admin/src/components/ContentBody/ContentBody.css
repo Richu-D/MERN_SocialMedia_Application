@@ -1,0 +1,17 @@
+.ContentBody{
+    position: relative;
+}
+
+.contents{
+    position: absolute;
+    top:90px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    width: 100%;
+}
+
+.contents .right{
+    max-height: 85vh;
+    overflow-y: scroll;
+}
+

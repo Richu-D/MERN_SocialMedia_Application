@@ -1,0 +1,23 @@
+.profilePic img{
+width: 40px;
+border-radius: 50%;
+}
+.userTable button{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+}
+.unblockbtn{
+    background-color: rgba(36, 255, 36, 0.842);
+}
+.unblockbtn:hover{
+    background-color: rgb(3, 216, 3);
+}
+.blockbtn{
+    background-color: rgba(247, 28, 28, 0.805);
+}
+.blockbtn:hover{
+    background-color: rgba(240, 19, 19, 0.946);
+}

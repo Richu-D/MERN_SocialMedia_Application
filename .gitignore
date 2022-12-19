@@ -1,3 +1,6 @@
 api/node_modules
 api/firebase
+api/.env
 client/node_modules
+admin/.env
+admin/node_modules
