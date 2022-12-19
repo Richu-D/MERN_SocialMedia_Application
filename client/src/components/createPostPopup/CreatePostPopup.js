@@ -25,29 +25,6 @@ export default function CreatePostPopup({ user,setPostVisiblity,setReloadPost })
 
  async function  handlePost(){
 
-
-    // console.log("text",text,"image",images);
-    // /users/post/
-    // let fileName = "Hello"
-    // storage.ref(`/items/${fileName}`).put(images);
-    // try {
-      
-    
-  // if(images){
-  //   const fileId = uuidv4();
-  //   const uploadTask = storage.ref(`/items/${fileId}`).put(images);
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //       console.log("Upload is " + progress + "% done");
-  //       // setProcess(progress)
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //    async () => {
-  //     uploadTask.snapshot.ref.getDownloadURL().then(async(url) => { 
         try {
           
 var formData = new FormData();
@@ -73,24 +50,8 @@ if(text||images) {
           }
 
 }
-          
-        // } catch (error) {
-        //   console.log("error",error);
-        // }
-      // })
 
       }
-      // )
-    
-    // }else{
-    //   try {
-    //   //  console.log("token from local storage",getTokenFromLocalStorage())
-    //     let data = await instance.post("/post",{
-    //       text,
-    //       "visibility":"public"
-    //     })
-        // console.log("data",data.data); 
-        // alert("Uploaded successfully")
         
        catch (error) {
         setErr("Something Wrong Please Try after few time");
@@ -100,10 +61,6 @@ if(text||images) {
         }, 2000);
       }
     }
-      // } catch (error) {
-      //     console.log("Error from firebase ",error);
-      // }
-  // }
   return (
     <div  className="blur">
       <div ref={postPromt}  className="postBox">
@@ -113,7 +70,7 @@ if(text||images) {
           </div>
           <span>Create Post</span>
         </div>
-          <BarLoader color="#1876f2" loading={loading} width={500} size={50} />
+          <BarLoader color="#1876f2" loading={loading} width={"100%"} size={50} />
         <div className="box_profile">
           <img src={user?.picture||defaultPicture} alt="Profile" className="box_profile_img" />
         

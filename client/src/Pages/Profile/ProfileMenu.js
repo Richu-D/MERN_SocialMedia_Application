@@ -1,27 +1,18 @@
-import { Link } from "react-router-dom";
-import { Dots } from "../../svg";
-
-export default function ProfileMenu() {
+export default function ProfileMenu({option,setOption,followersCount,followingCount}) {
   return (
     <div className="profile_menu_wrap">
       <div className="profile_menu">
-        <Link to="/" className="profile_menu_active">
+        <div onClick={()=>{setOption("posts")}} className={`${(option==="posts")?"profile_menu_active":"hover1"}`}>
           Posts
-        </Link>
-        <Link to="/" className="hover1">
+        </div>
+        <div onClick={()=>{setOption("about")}} className={`${(option==="about")?"profile_menu_active":"hover1"}`}>
           About
-        </Link>
-        <Link to="/" className="hover1">
-         Followers
-        </Link>
-        <Link to="/" className="hover1">
-         Following
-        </Link>
-        <Link to="/" className="hover1">
-          More
-        </Link>
-        <div className="p10_dots">
-          <Dots />
+        </div>
+        <div onClick={()=>{setOption("followers")}} className={`${(option==="followers")?"profile_menu_active":"hover1"}`}>
+         Followers ({followersCount})
+        </div>
+        <div onClick={()=>{setOption("following")}} className={`${(option==="following")?"profile_menu_active":"hover1"}`}>
+         Following ({followingCount})
         </div>
       </div>
     </div>

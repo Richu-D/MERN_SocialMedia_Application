@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import defaultProfilePic from "../../images/default_profile.png"
 import useInstance from "../../axios/axiosInstance";
 
-export default function CreateComment({post,setReloadPost}) {
-  console.log("inside cmment",post);
+export default function CreateComment({post,setReloadPost,setShowComment}) {
   const instance = useInstance() 
   const { user } = useSelector((user) => ({ ...user }));
   const [picker, setPicker] = useState(false);
@@ -48,6 +47,22 @@ export default function CreateComment({post,setReloadPost}) {
       setCommentImage(event.target.result);
     };
   };
+
+  async function handleMsgUpload(){
+      try {
+        if(text.trim()==="") return ; //need to show empty error msg
+          let result = await instance.post(`/comment/${post._id}`,{ "comment":text })
+            if(result?.data?.status){
+              setText("")
+              setReloadPost(prev => !prev)
+              setShowComment(true)
+              // need to show success message 
+            }
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
   return (
     <div className="create_comment_wrap">
       <div className="create_comment">
@@ -79,6 +94,11 @@ export default function CreateComment({post,setReloadPost}) {
             value={text}
             placeholder="Write a comment..."
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e)=>{
+              if(e.key==="Enter"){
+                handleMsgUpload()
+              }
+          }}
           />
           <div
             className="comment_circle_icon hover2"
@@ -98,20 +118,7 @@ export default function CreateComment({post,setReloadPost}) {
             <i className="fa-solid fa-note-sticky" />
           </div>
           <div className="comment_circle_icon hover2">
-            <i className="fa-sharp fa-solid fa-paper-plane" onClick={async ()=>{
-              try {
-               let result = await instance.post(`/comment/${post._id}`,{
-                "comment":text
-               })
-                if(result?.data?.status){
-                  setText("")
-                  setReloadPost(prev => !prev)
-                  // comment added successfully msg front end il kanikkanam
-                }
-              } catch (error) {
-                console.log(error);
-              }
-            }}/>
+            <i className="fa-sharp fa-solid fa-paper-plane" onClick={handleMsgUpload}/>
           </div>
         </div>
       </div>

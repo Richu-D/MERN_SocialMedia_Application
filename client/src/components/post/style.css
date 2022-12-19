@@ -31,6 +31,29 @@
   .post_header_right {
     display: flex !important;
     gap: 5px;
+    position: relative;
+  }
+  #postEditMoreOption{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+  }
+  .open_post_edit{
+    background: var(--bg-primary);
+    position: absolute;
+    right: 0;
+    top:30px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
+      inset 0 0 0 px var(--shadow-inset);
+    z-index: 9;
+  }
+  .open_post_edit_item{
+    display: flex;
+    gap:10px;
   }
   .post_header_right i{
     font-size: large;

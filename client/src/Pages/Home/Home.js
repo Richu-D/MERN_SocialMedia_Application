@@ -3,7 +3,6 @@ import Header from "../../components/header/Header"
 import "./home.css"
 
 import { useEffect, useReducer, useState } from "react";
-import { useSelector } from "react-redux";
 import  useInstance  from "../../axios/axiosInstance.js";
 import Post from "../../components/post/post";
 function reducer(state, action) {
@@ -26,6 +25,7 @@ function reducer(state, action) {
 }
 
 const Home = () => {
+
   const [reloadPost,setReloadPost] = useState(false)
   const instance = useInstance()
   const [{ loading, error, posts }, dispatch] = useReducer(reducer, {

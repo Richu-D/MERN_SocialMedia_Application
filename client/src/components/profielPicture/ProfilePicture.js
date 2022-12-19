@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./style.css";
 import UpdateProfilePicture from "./UpdateProfilePicture.js";
-export default function ProfilePicture({setShow,setRefresh}) {
+export default function ProfilePicture({setShow,setReloadPost}) {
   const refInput = useRef(null);
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
@@ -51,10 +51,6 @@ export default function ProfilePicture({setShow,setRefresh}) {
               {/* <i className="fa-solid fa-plus"></i> */}
               Upload photo
             </button>
-            <button className="gray_btn">
-              <i className="frame_icon"></i>
-              Add frame
-            </button>
           </div>
         </div>
         {error && (
@@ -67,7 +63,7 @@ export default function ProfilePicture({setShow,setRefresh}) {
         )}
         <div className="old_pictures_wrap"></div>
       </div>
-      {image && <UpdateProfilePicture setRefresh={setRefresh} setShow={setShow} setImage={setImage} image={image} />}
+      {image && <UpdateProfilePicture setReloadPost={setReloadPost} setShow={setShow} setImage={setImage} image={image} />}
     </div>
   );
 }

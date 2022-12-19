@@ -5,13 +5,9 @@ import { useRef, useState } from "react";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import useClickOutside from "../../helpers/clickOutside"
 
 const RegisterForm = ({setVisible}) => {
-  const element = useRef(null);
-  useClickOutside(element,()=>{
-    setVisible(false)
-  })
+ 
     const dispatch = useDispatch();
 
     const usernameError = useRef()
@@ -100,7 +96,7 @@ const RegisterForm = ({setVisible}) => {
 
   return (
     <div className="blur">
-      <div className="register" ref={element}>
+      <div className="register">
         <div className="register_header">
           <i className="fa-solid fa-xmark"  onClick={()=>setVisible(false)} />
           <h3>Register</h3>

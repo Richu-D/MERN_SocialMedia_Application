@@ -23,7 +23,7 @@ export default function useInstance(){
   );
   
   instance.interceptors.response.use(
-    (res) => {
+    (res) => { 
       return res;
     },
     async (err) => {
@@ -45,7 +45,16 @@ export default function useInstance(){
         } catch (_error) {
           return Promise.reject(_error);
         }
-      } else if(err?.response?.status === 403){
+      }else if(err?.response?.status === 403 && err?.response?.data?.message === "User Blocked"){
+       try {
+        dispatch({
+          type:"BLOCK"
+        })
+       } catch (error) {
+        console.log(error);
+       }
+      }
+       else if(err?.response?.status === 403  && err?.response?.data?.message === "User Logout"){
         dispatch({
           type:"LOGOUT"
         })

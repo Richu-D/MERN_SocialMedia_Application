@@ -9,7 +9,7 @@
   .profile_container {
     max-width: 945px;
     margin: 0 auto;
-    min-height: 10vh;
+    min-height: 80vh;
   }
   .profile_cover {
     position: relative;
@@ -19,6 +19,17 @@
     border-bottom-right-radius: 8px;
     background: var(--bg-secondary);
   }
+
+  .profile_cover img{
+    width: inherit;
+  }
+.cover_crooper img{
+width: 100%;
+}
+
+.cover_crooper .reactEasyCrop_CropArea{
+  width: 100%;
+}
   .udpate_cover_wrapper {
     position: absolute;
     bottom: 1rem;
@@ -129,10 +140,11 @@
     border-top: 1px solid var(--border-color);
     display: flex;
     padding: 0;
+    justify-content: space-evenly;
   }
-  .profile_menu a {
+  .profile_menu div {
     height: 54px;
-    width: 78.5px;
+    width: 90.5px;
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
@@ -145,7 +157,6 @@
   }
   .profile_menu_active {
     height: 60px !important;
-    width: 65px !important;
     margin: 0 !important;
     color: var(--blue-color) !important;
     border-bottom: 3px solid var(--blue-color);
@@ -174,6 +185,7 @@
   }
   .bottom_container {
     padding: 10px 2.2rem;
+    min-height: 90vh;
   }
   .pplumayknow_list {
     display: flex;
@@ -229,11 +241,7 @@
   .pplumayknow_list .light_blue_btn {
     color: var(--blue-color);
   }
-  .profile_grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 10px;
-  }
+ 
   /*------ppl u may know------*/
   .left_header_grid {
     font-size: 22px;
@@ -272,4 +280,61 @@
     font-weight: 700;
     font-size: 20px;
     color: var(--color-secondary);
+  }
+  .save_changes_cover {
+    z-index: 999999999;
+    position: fixed;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+  .save_changes_left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+  }
+  .save_changes_left i {
+    filter: invert(100%);
+  }
+  .save_changes_right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .save_changes_right button {
+    padding: 10px;
+  }
+  .save_changes_right button:first-of-type {
+    width: 100px;
+    background: #39393f;
+  }
+  .save_changes_right button:last-of-type {
+    width: 160px;
+  }
+  .cover_error{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+  }
+  .bottom_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .bottom_container .posts{
+    width: 50vw;
+  }
+  .Private_Account_badge{
+    
+  }
+  .Public_Account_badge{
+
   }

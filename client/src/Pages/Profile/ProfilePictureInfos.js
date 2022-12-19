@@ -4,13 +4,13 @@ import ProfilePicture from "../../components/profielPicture/ProfilePicture.js";
 import defaultProfilePic from "../../images/default_profile.png"
 
 
-export default function ProfielPictureInfos({setRefresh}) { 
+export default function ProfielPictureInfos({setReloadPost}) { 
   const [show, setShow] = useState(false);
   let { user } = useSelector((user) => ({ ...user }));
   // console.log("profile is ",profile);
     return (
       <div className="profile_img_wrap">
-         {show && <ProfilePicture setRefresh={setRefresh}  setShow={setShow}/>}
+         {show && <ProfilePicture setReloadPost={setReloadPost}  setShow={setShow}/>}
         <div className="profile_w_left">
           <div className="profile_w_img">
             <div
@@ -20,8 +20,8 @@ export default function ProfielPictureInfos({setRefresh}) {
                 backgroundImage: `url(${user?.picture||defaultProfilePic})`,
               }}
             ></div>
-            <div className="profile_circle hover1">
-              <i className="fa-solid fa-camera" onClick={()=>{setShow(prev => !prev)}}></i>
+            <div className="profile_circle hover1" onClick={()=>{setShow(prev => !prev)}}>
+              <i className="fa-solid fa-camera" />
             </div>
           </div>
           <div className="profile_w_col">
@@ -34,13 +34,10 @@ export default function ProfielPictureInfos({setRefresh}) {
           </div>
         </div>
         <div className="profile_w_right">
-          <div className="blue_btn">
-            <img src="../../../icons/plus.png" alt="" className="invert" />
-            <span>Add to story</span>
-          </div>
-          <div className="gray_btn">
+
+          <div className={`${(user.isPrivate)?"Private_Account_badge":"Public_Account_badge"}`}>
             <i className="edit_icon"></i>
-            <span>Edit profile</span>
+            <span>{`${(user.isPrivate)?"Private":"Public"} Account`}</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,31 @@
+#BlockPage{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+#BlockPagContainer{
+    transition: all .6s; 
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color:white;
+    text-shadow: 0 0 3px black;
+    cursor: default;
+    border-radius: 10px;
+}
+#BlockPagContainer:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+#BlockPagContainer img{
+    width: 5vw;
+    margin-right: 10px;
+}

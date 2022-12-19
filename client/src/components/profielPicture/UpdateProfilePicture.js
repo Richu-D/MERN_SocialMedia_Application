@@ -6,7 +6,7 @@ import useInstance from "../../axios/axiosInstance";
 import getCroppedImg from "../../helpers/getCroppedImg";
 import BarLoader from "react-spinners/BarLoader";
 
-export default function UpdateProfilePicture({ setImage, image, setError ,setShow ,setRefresh}) {
+export default function UpdateProfilePicture({ setImage, image, setError ,setShow ,setReloadPost}) {
   
   const [success,setSuccess]= useState(null);
   const [err,setErr]= useState(null);
@@ -67,7 +67,7 @@ export default function UpdateProfilePicture({ setImage, image, setError ,setSho
             setLoading(false)
             setTimeout(() => {
               dispatch({type:"UpdateProfile",payload: res?.data?.picture })
-              setRefresh(prev => !prev)
+              setReloadPost(prev => !prev)
               setShow(false)
             }, 1000);
 
@@ -76,7 +76,8 @@ export default function UpdateProfilePicture({ setImage, image, setError ,setSho
     } catch (error) {
       setLoading(false)
       setErr(true)
-      setError(error.response.data.message);
+      // setError(error.response.data.message);
+      console.log(error);
     }
   };
   return (
@@ -85,6 +86,9 @@ export default function UpdateProfilePicture({ setImage, image, setError ,setSho
         <div className="small_circle" onClick={() => setImage("")}>
           <i className="exit_icon"></i>
         </div>
+        <div className="small_circle">
+            <i className="fa-regular fa-circle-xmark" onClick={()=>{setShow(false)}}></i>
+          </div>
         <span>Update profile picture</span>
       </div>
       <BarLoader color="#1876f2" loading={loading} width={"100%"} size={50} />
@@ -113,7 +117,7 @@ export default function UpdateProfilePicture({ setImage, image, setError ,setSho
         </div>
         <div className="slider">
           <div className="slider_circle hover1" onClick={() => zoomOut()}>
-            <i className="minus_icon"></i>
+            <i className="fa-solid fa-minus"></i>
           </div>
           <input
             type="range"
@@ -125,7 +129,7 @@ export default function UpdateProfilePicture({ setImage, image, setError ,setSho
             onChange={(e) => setZoom(e.target.value)}
           />
           <div className="slider_circle hover1" onClick={() => zoomIn()}>
-            <i className="plus_icon"></i>
+            <i className="fa-solid fa-plus"></i>
           </div>
         </div>
       </div>
