@@ -34,11 +34,51 @@ mongoose
     const io = socketio(expressServer,{
       cors: "*"
     })
+    let users = []
+
+    const addUser = (userId,socketId) =>{
+      !users.some((user)=> user.userId === userId) && users.push({userId,socketId})
+    }
+    const removeUser = (socketId) =>{
+      users = users.filter(user => user.socketId !== socketId)
+    }
+    
+    const getUser = (userId) => {
+      return users.find((user) => user.userId === userId);
+    };
+
+
     io.on("connection",(socket)=>{
-      socket.emit("welcome",{data:"welcome to socket.io from server"})
-      socket.on("welcome",(data)=>{
-        console.log("data from client is :",data);
+      // socket.emit("welcome",{data:"welcome to socket.io from server"})
+      socket.on("addUser",(userId)=>{
+        console.log(userId,"userId");
+        addUser(userId,socket.id)
+        io.emit("getUsers",users)
+
       })
+      socket.on("disconnect",()=>{
+        console.log("user disconnected");
+        removeUser(socket.id)
+        io.emit("getUsers",users)
+      })
+
+      socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+        try {
+          console.log(senderId, receiverId, text,"data in the socket");
+          const user = getUser(receiverId);
+        socket.to(user.socketId).emit("getMessage", {
+          senderId,
+          text,
+          createdAt:Date.now()
+        });
+        } catch (error) {
+          console.log("user not available");
+        }
+        
+      });
+
+
+
     })
 })
   .catch((err) => console.log("error connecting to mongodb", err));

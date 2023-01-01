@@ -6,14 +6,15 @@ const refreshToken = async (req,res) => {
     try {
       let refreshToken = req.header("refreshToken")
 
-    if(!refreshToken) return res.status(400).json({ message: "refreshToken is not available" });
+    if(!refreshToken) return res.status(400).json({ message: "Invalid RefreshToken" });
    
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
-        if (err) return res.status(401).json({ message: "Invalid Authentification" });
-       return user.id
+    let validToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, payload) => {
+        if (err) return ""
+       return payload.admin
       });
-      
 
+      if(!validToken) return res.status(401).json({ message: "Invalid RefreshToken" });
+      
      const token = generateToken({ admin:true },process.env.TOKEN_SECRET, "30m");
 
       res.json({token})

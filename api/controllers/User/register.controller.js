@@ -89,9 +89,7 @@ const register = async (req,res)=>{
             bDay,
             gender,
           }).save();
-
-         
-
+          
           const emailVerificationToken = generateToken(
             {id:user._id.toString()},
             process.env.EMAIL_TOKEN_SECRET,
@@ -120,8 +118,8 @@ const register = async (req,res)=>{
           });
 
          } catch (error) {
-          console.log(error);
-          res.status(500).json({ message: error.message });
+          console.log(error,"Register Error");
+          res.status(500).json({ message: error.message }); 
         }
     
 

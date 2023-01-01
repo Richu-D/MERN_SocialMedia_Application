@@ -14,10 +14,16 @@ const resendVerification = async (req, res) => {
         "30m"
       );
       const url = `${process.env.FRONTEND_BASE_URL}/activate/${emailVerificationToken}`;
-      sendVerificationEmail(user.email, user.first_name, url);
+      try {
+        sendVerificationEmail(user.email, user.first_name, url);
+        
+      } catch (error) {
+        
+      }
       return res.status(201).json({ message: "Email verification link has been sent to your email." });
   
     }catch (error) {
+      console.log(error,"Resend Error");
       res.status(500).json({ message: error.message });
     }
   }

@@ -96,18 +96,14 @@ const userSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    chatFriends: {
+      type: Array,
+      default: [],
+    },
     blockedPeople: {
       type: Array,
       default: [],
     },
-    search: [
-      {
-        user: {
-          type: ObjectId,
-          ref: "User",
-        },
-      },
-    ],
     details: {
       bio: {
         type: String,
@@ -135,18 +131,6 @@ const userSchema = mongoose.Schema(
         enum: ["Single", "In a relationship", "Married", "Divorced"],
       }
     },
-    savedPosts: [
-      {
-        post: {
-          type: ObjectId,
-          ref: "Post",
-        },
-        savedAt: {
-          type: Date,
-          default: new Date(),
-        },
-      },
-    ],
   },
   {
     timestamps: true,

@@ -27,6 +27,9 @@ const postSchema = new mongoose.Schema(
     background: {
       type: String,
     },
+    reports: [{
+      type: String,
+    }],
     comments: [
       {
         comment: {

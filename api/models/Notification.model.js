@@ -7,12 +7,16 @@ const NotificationSchema = new mongoose.Schema(
     },
     emiterId: {
       type: String,
+      ref: "User",
+      required: true,
     },
     text: {
       type: String,
     },
     postId: {
       type: String,
+      ref: "Post",
+      required: true,
     },
     isVisited: {
       type: Boolean,

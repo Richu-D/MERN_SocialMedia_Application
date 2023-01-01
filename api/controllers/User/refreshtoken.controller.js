@@ -9,17 +9,19 @@ const refreshToken = async (req,res) => {
     if(!refreshToken) return res.status(400).json({ message: "refreshToken is not available" });
     
     let userId = jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
-        if (err) return res.status(401).json({ message: "Invalid Authentification" });
+        if (err) return ""
        return user.id
       });
-      
+
+      if(!userId) return res.status(401).json({ message: "Invalid RefreshToken" });
+
       let user =  await refreshTokenList.findById({"_id":userId})
       if(!user) return res.status(400).json({ message: "No user found" });
       
       let {refreshTokens} = user;
      if(!refreshTokens.includes(refreshToken)) return res.status(403).json({ message: "User Logout" });
 
-     const token = generateToken({ id: userId },process.env.TOKEN_SECRET, "20s");
+     const token = generateToken({ id: userId },process.env.TOKEN_SECRET, "30m");
 
       res.json({token})
 
