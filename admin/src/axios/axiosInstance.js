@@ -28,7 +28,11 @@ export default function useInstance(){
     },
     async (err) => {
       const originalConfig = err?.config;
-      if (err?.response?.status === 401 && !originalConfig._retry) {
+      if (err?.response?.status === 401 && err?.response?.data?.message === "Invalid RefreshToken"){
+        dispatch({
+          type:"LOGOUT"
+        })
+      } else if (err?.response?.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         
         try {

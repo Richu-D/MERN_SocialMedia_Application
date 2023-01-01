@@ -21,3 +21,28 @@ border-radius: 50%;
 .blockbtn:hover{
     background-color: rgba(240, 19, 19, 0.946);
 }
+.User_profile_Wrapper{
+    border-radius: 50px;
+    padding: 5px;
+    height: 50px;
+}
+.usersTablePagination{
+    width: 50%;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userTableNextBtn , .userTablePrevBtn{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(18, 18, 20);
+    color: white;
+    cursor: pointer;
+}
+
+.userTableNextBtn:hover,.userTablePrevBtn:hover{
+    background-color: rgb(3, 3, 10);
+}

@@ -1,0 +1,49 @@
+.comments_list{
+  max-height: 50vh;
+    overflow-y: scroll;
+}
+.comments_list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.comments_list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.comments_list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.comments_list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.comment_box{
+  margin: 15px 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 20px;
+  border-radius: 11px;
+}
+
+.commenter_header{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.commenter_profile{
+    display: flex;
+    width: 15rem;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.commenter_profile img{
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.commenter_details{
+  margin-left: 70px;
+}

@@ -8,6 +8,7 @@ import defaultProfilePic from "../../images/default_profile.png"
 const Users = () => {
   const instance = useInstance()
   const [usersList,setUsersList] = useState(null)
+  const [count,setCount] = useState(0)
 
   async function handleBlock(userId){
     console.log(userId)
@@ -47,7 +48,22 @@ const Users = () => {
     fetchUser()
    
   },[])
-  
+  const handlePagination = async (skip)=>{
+    console.log(skip);
+    setCount(count+skip)
+    if(count+skip>=0){
+      try {
+        let result = await instance.get(`/users?skip=${count+skip}`)
+        console.log(result.data,"result");
+        setUsersList(result?.data)
+      } catch (error) {
+        console.log("error is",error);
+      }
+    }else{
+      setCount(0)
+    }
+    
+  }
   return (
     <div>
       {
@@ -60,7 +76,6 @@ const Users = () => {
       <th>email</th>
       <th>Birth Day</th>
       <th>operation</th>
-      <th>verified</th>
       <th>following</th>
       <th>followers</th>
        </tr>
@@ -69,8 +84,15 @@ const Users = () => {
        
 {
       usersList.map(user => {
+        let color = user.verified ?"green":"red"
         return <tr key={user._id}>
-          <td className="profilePic"><img src={user.picture||defaultProfilePic} alt="profile"  /></td>
+          <td className="profilePic">
+            <div className="User_profile_Wrapper" style={{
+              backgroundColor:color
+            }}>
+            <img src={user.picture||defaultProfilePic} alt="profile"  />
+            </div>
+            </td>
           <td>{user.username}</td>
           <td>{user.email}</td>
           <td>{`${user.bDay}/${user.bMonth}/${user.bYear}`}</td>
@@ -87,7 +109,6 @@ const Users = () => {
             </button>
             }
             </td>
-          <td>{`${user.verified}`}</td>
           <td>{user.following.length}</td>
           <td>{user.followers.length}</td>
         </tr>
@@ -96,6 +117,11 @@ const Users = () => {
 </tbody>
       </table>
       }
+    <div className="usersTablePagination">
+      <button className="userTablePrevBtn" onClick={()=>handlePagination(-8)}>Prev</button>
+      <span>{(count/8||0)+1}</span>
+      <button className="userTableNextBtn" onClick={()=>handlePagination(8)}>Next</button>
+    </div>
     </div>
   )
 }
