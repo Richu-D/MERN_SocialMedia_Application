@@ -26,10 +26,6 @@ async function fetchData(){
     }
 }
 
-
-
-
-
   return (
     <div className="comment_box">
         <div className='commenter_header'>
@@ -37,10 +33,8 @@ async function fetchData(){
         <img src={userdetails.picture||defaultProfilePic} alt="profile" />
         <span>{userdetails.username}</span> 
         <Moment fromNow interval={30}>
-                {comment.commentAt}
-                
+                {comment.commentAt} 
         </Moment>
-                {console.log("comment created At ",comment.commentAt)}
         </div>
         {user.id === comment.commentBy &&
         <i className='fa-solid fa-trash' onClick={async ()=>{

@@ -1,19 +1,19 @@
 import {Routes , Route} from "react-router-dom"
 import Login from "./Pages/Login/Login.js";
 import Profile from "./Pages/Profile/Profile.js";
-import Blocked from "./Pages/Blocked/Blocked.js";
 import Home from "./Pages/Home/Home.js";
 import LoggedInRoutes from "./routes/LoggedInRoutes"
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes"
 import Activate from "./Pages/Activate/Activate.js";
 import ProfileOfOther from "./Pages/ProfileOfOther/ProfileOfOther.js";
-import Message from "./Pages/Message/Message.js";
+import Messenger from "./Pages/Messenger/Messenger.js";
 
 const App = () => { 
+
   return  <div>
   <Routes>
     <Route element={<LoggedInRoutes />}>
-      <Route path="/message" element={<Message />} exact />
+      <Route path="/messenger" element={<Messenger />} exact />
       <Route path="/profile" element={<Profile />} exact />
       <Route path="/profile/:username" element={<ProfileOfOther />}  />
       <Route path="/" element={<Home />} exact />

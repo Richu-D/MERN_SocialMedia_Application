@@ -1,0 +1,38 @@
+.resendMailContainer{
+width: 100vw;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.resendMailContent{
+height: 200px;
+width: 300px;
+padding: 20px;
+border-radius: 5px;
+background-color: white;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+}
+
+.resendMailContent button{
+    width: 100%;
+    border: none;
+    background-color: rgb(45, 131, 45);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.resendMailContent button:disabled{
+    cursor: default;
+    background-color: rgba(56, 124, 56, 0.464);
+}
+
+.result_success{
+    color: rgb(57, 232, 57);
+}

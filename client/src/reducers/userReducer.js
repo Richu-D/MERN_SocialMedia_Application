@@ -13,6 +13,18 @@ export function userReducer(state = JSON.parse(localStorage.getItem("user")), ac
         return {
             ...state, isBlocked: true
           };
+      case "PRIVATE":
+        return {
+            ...state, isPrivate: true
+          };
+      case "SOCKET":
+        return {
+            ...state,socket:action.payload
+          };
+      case "PUBLIC":
+        return {
+            ...state, isPrivate: false
+          };
       case "UpdateProfile":
         newUserInfo = JSON.parse(localStorage.getItem("user"))
         newUserInfo = {...newUserInfo, picture: action.payload }

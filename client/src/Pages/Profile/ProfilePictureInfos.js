@@ -1,13 +1,41 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import useInstance from "../../axios/axiosInstance.js";
 import ProfilePicture from "../../components/profielPicture/ProfilePicture.js";
 import defaultProfilePic from "../../images/default_profile.png"
 
 
+
 export default function ProfielPictureInfos({setReloadPost}) { 
+  const Instance = useInstance()
+  const makeAccountPublic = async () =>{
+    try {
+      let result = await Instance.patch("/makeAccountPublic")
+      console.log(result.data.message);
+      dispatch({
+        type:"PUBLIC"
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const makeAccountPrivate = async () =>{
+    try {
+      let result = await Instance.patch("/makeAccountPrivate")
+      console.log(result);
+      dispatch({
+        type:"PRIVATE"
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const [show, setShow] = useState(false);
   let { user } = useSelector((user) => ({ ...user }));
+  const dispatch = useDispatch();
   // console.log("profile is ",profile);
+  {console.log(user,"User from profile pictrue infos")}
     return (
       <div className="profile_img_wrap">
          {show && <ProfilePicture setReloadPost={setReloadPost}  setShow={setShow}/>}
@@ -33,11 +61,15 @@ export default function ProfielPictureInfos({setReloadPost}) {
             <div className="profile_friend_imgs"></div>
           </div>
         </div>
+         
         <div className="profile_w_right">
 
           <div className={`${(user.isPrivate)?"Private_Account_badge":"Public_Account_badge"}`}>
             <i className="edit_icon"></i>
-            <span>{`${(user.isPrivate)?"Private":"Public"} Account`}</span>
+              {(user.isPrivate)
+              ? <button className="publicAccountBtn" onClick={()=>makeAccountPublic()}>Make Account Public</button>
+                : <button className="privateAccountBtn" onClick={()=>makeAccountPrivate()}>Make Account Private</button>
+                }
           </div>
         </div>
       </div>

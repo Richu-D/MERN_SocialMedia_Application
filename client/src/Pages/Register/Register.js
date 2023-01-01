@@ -6,7 +6,7 @@ import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-const RegisterForm = ({setVisible}) => {
+const RegisterForm = ({setVisible,setreSendMailVisible}) => {
  
     const dispatch = useDispatch();
 
@@ -83,7 +83,8 @@ const RegisterForm = ({setVisible}) => {
       setTimeout(() => {
         dispatch({ type: "LOGIN", payload: rest });
         localStorage.setItem("user",JSON.stringify(rest))
-        // navigate("/");
+        setVisible(false)
+        setreSendMailVisible(true)
       }, 1000);
     } catch (error) {
         console.log("Error");

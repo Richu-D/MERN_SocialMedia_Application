@@ -3,36 +3,69 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../images/ColorMediaLogo.jpg";
 import Swal from "sweetalert2"
 import default_profile from "../../images/default_profile.png"
-// import { io } from "socket.io-client";
+import Moment from "react-moment";
 
 
 import {
-  Menu,
   Messenger,
   Notifications,
   Search,
 } from "../../svg";
 import { useDispatch, useSelector } from "react-redux";
 import useInstance from "../../axios/axiosInstance.js";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useClickOutside from "../../helpers/clickOutside";
+
 
  const Header = ({page}) => {
+
+   
+   const [searchSuggession,setSearchSuggession] = useState(false)
+  const [notificationIcon,setNotificationIcon] = useState(false)
   const navigate = useNavigate()
   let instance = useInstance()
   const [searchText,setSearchText] = useState("")
+  const [msgCount,setMsgCount] = useState(0)
+  const [usersList,setUsersList] = useState([])
+  const [notificationList,setNotificationList] = useState([])
   const { user } = useSelector((user) => ({ ...user }));
   const dispatch = useDispatch()
-  
+  const suggessionPromt = useRef(null)
+  useClickOutside(suggessionPromt,()=>{
+    setSearchSuggession(false)
+  })
+
   const color = "#65676b";
+  
+  const socket = useRef()
+  useEffect(()=>{
+    socket.current = user?.socket?.current;
+    socket.current.on("getMessage", (data) => {
+      setMsgCount(prev => prev+1)
+    });
+  },[])
+  
 
+  const searchUserSuggession = async (pattern)=>{
+    // console.log(pattern);
+    let suggestedUsers = await instance.get(`/searchUserSuggession/${pattern}`)
+    // console.log(suggestedUsers.data);
+    setUsersList(suggestedUsers.data)
+  }
 
-//   const socket = io("ws://localhost:5000");
-// socket.emit("welcome",{data:"hello from client"})
-// socket.on("welcome",(data)=>{
-//   console.log("Message from server",data);
-// })
- 
-
+  const handleNotification = async ()=>{
+    setNotificationIcon(prev=>!prev)
+    if(!notificationIcon){
+      try {
+        let res = await instance.get(`/notifications`)
+        console.log(res.data);
+        setNotificationList(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+      
+    }
+  }
   return (
     <header>
       <div className="header_left">
@@ -49,16 +82,38 @@ import { useState } from "react";
             className="hide_input"
             value={searchText}
             onKeyDown={(e)=>{
-                if(e.key==="Enter"){
-                  navigate(`/profile/${searchText}`)
-                }
+              if(e.key==="Enter"){
+                navigate(`/profile/${searchText}`)
+              }
             }}
             onChange={(e)=>{
               setSearchText(e.target.value)
+              setSearchSuggession(true)
+              searchUserSuggession(e.target.value)
             }}
           
           />
         </div>
+        {
+          searchSuggession && 
+          <div ref={suggessionPromt} className="search_suggession">
+           <p>search suggesions</p> 
+          {
+           usersList && usersList?.map(eachUser => {
+              // console.log(eachUser);
+          return  (<div key={eachUser?._id} onClick={()=>{navigate(`/profile/${eachUser?.username}`)}} className="profile_suggession_container">
+            <div className="profile_suggession_image">
+              <img src={eachUser?.picture||default_profile} alt="" srcset="" />
+            </div>
+            <div className="profile_suggession_username">{eachUser?.username}</div>
+           </div>)
+            })
+          }
+           
+            
+            </div>
+        }
+        
       </div>
       <div className="header_middle">
         <Link to="/" className={`middle_icon ${page === "home" ? "active" : "" } `}>
@@ -68,7 +123,7 @@ import { useState } from "react";
         <Link to="/" className="middle_icon hover1">
           {/* <Friends color={color} /> */}
         <i className="fa-solid fa-user-group" style={{color:"#0092bf",fontSize:"25px"}}/>
-          <div className="middle_notification">99+</div> 
+          {/* <div className="middle_notification">99+</div>  */}
         </Link>
         <Link to="/" className="middle_icon hover1">
         <i className="fa fa-bolt fa-fw" style={{color:"#0092bf",fontSize:"25px"}}/>
@@ -87,18 +142,74 @@ import { useState } from "react";
           <img src={user?.picture ||default_profile} alt="Profile" />
           <span>{user?.username}</span>
         </Link>
-        <div className="circle_icon hover1">
-          <Menu />
-        </div>
+        
         <div  className={`circle_icon hover1 ${page === "message" ? "active_link" : ""}`} onClick={()=>{
-            navigate("/message")
+            navigate("/messenger")
         }}>
           <Messenger />
-        <div className={`${page === "message" ? "" : "right_notification"}`}>{`${page === "message" ? "" : "99+"}`}</div>          
+          {
+            msgCount ?
+            <div className={`${page === "message" ? "" : "right_notification"}`}>
+          {`${page === "message" ? "" : msgCount ? msgCount : ""}`}
+          </div>   
+          :""       
+        }
         </div>
-        <div className="circle_icon hover1">
+        <div className={`notification circle_icon hover1 ${notificationIcon ? "active_link" :""} `} onClick={()=>{handleNotification()}}>
           <Notifications />
-          <div className="right_notification">8</div>
+          {/* <div className="right_notification">8</div>  */}
+          {
+          notificationIcon && 
+          <div ref={suggessionPromt} className="notification_container">
+           <p>Notifications </p> 
+          {
+           notificationList && notificationList?.map(eachNotification => {
+              console.log(eachNotification);
+          return  (
+           <div className="postNotificationContainer">
+            <div className="emiterImgAndNameContainer">
+            <div className="Notification_image">
+              <img 
+               onClick={()=>{navigate(`/profile/${eachNotification?.emiterId?.username}`)}}
+              src={eachNotification?.emiterId?.picture||default_profile} alt="" srcset="" />
+            </div>
+            <div className="profile_suggession_username">{eachNotification?.emiterId?.username}</div>
+            </div>
+            <div className="postNotificationBody">
+            <div className="PostNotificationHeader">
+            <div className="PostNotificationHeading">
+            <div className="NotificationMsg">{eachNotification?.text}</div>
+            </div>
+            <div className="NotificationTime">
+               <Moment fromNow interval={30}>
+                {eachNotification?.createdAt}
+              </Moment>
+            </div>
+            </div>
+            <div className="PostNotificationContentBody">
+              {
+                (eachNotification?.postId?.image)?
+              <div className="PostNotificationImg">
+              <img src={eachNotification?.postId?.image} alt="" srcset="" />
+              </div>
+                :""
+              }
+              
+              <div className="PostNotificationText">
+              <p>{eachNotification?.postId?.text}</p>
+              </div>
+            </div>
+            </div>
+           </div>
+           )
+
+
+            })
+          }
+           
+            
+            </div>
+        }
         </div>
         
         <div className="circle_icon hover1"  onClick={
@@ -126,6 +237,9 @@ import { useState } from "react";
           
          }>
           <i className="fa-solid fa-right-from-bracket"/>
+        </div>
+        <div className="hamburgerMenu circle_icon hover1">
+        <i class="fa-solid fa-bars"/>
         </div>
       </div>
     </header>

@@ -19,6 +19,7 @@ export default function Post({ post,setReloadPost }) {
   const [textValue,setTextValue] = useState(null)
   const [showComment,setShowComment] = useState(false)
   const [more,setMore] = useState(false)
+  const [othersOption,setOthersOption] = useState(false)
   const postEditTextRef = useRef(null)
   const postPromt = useRef(null)
   const threeDots = useRef(null)
@@ -47,6 +48,29 @@ export default function Post({ post,setReloadPost }) {
          if (result.isConfirmed) {
            try {
              let result = await instance.delete(`post/${post._id}`)
+             console.log(result);
+             if(result?.data?.status){
+               setReloadPost(prev => !prev)
+            }
+            } catch (error) {
+              console.log(error);
+            }
+         }
+       })
+       }
+  function handleReport(){
+    setMore(false)
+       Swal.fire({
+         title: 'Are you sure to Report this post ?',
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Report'
+       }).then(async(result) => {
+         if (result.isConfirmed) {
+           try {
+             let result = await instance.patch(`post/report/${post._id}`)
              console.log(result);
              if(result?.data?.status){
                setReloadPost(prev => !prev)
@@ -96,8 +120,8 @@ function handleEdit(){
           </div>
         </Link>
           {(user.id === post.user._id) 
-        ? <div ref={threeDots} id="postEditMoreOption" onClick={()=>{setMore(prev => !prev)}}> <Dots /> </div>
-        : "report"
+        ? <div ref={threeDots} className="postEditMoreOption" onClick={()=>{setMore(prev => !prev)}}> <Dots /> </div>
+        : <div  className="postEditMoreOption" onClick={()=>{setOthersOption(prev => !prev)}}> <Dots /> </div>
         }
         {
           more &&  <div className="post_header_right hover1" ref={postPromt}>
@@ -116,6 +140,18 @@ function handleEdit(){
                 className="open_post_edit_item hover1" onClick={handleDelete}>
                  <i className="fa-solid fa-trash" />
                  Delete Post
+              </div>
+            </div>
+        </div>
+        }
+        {
+          othersOption &&  <div className="post_header_right hover1" ref={postPromt}>
+      
+          <div className="open_post_edit" >
+              <div
+                className="open_post_edit_item hover1" onClick={handleReport}>
+                 <i className="fa-solid fa-circle-info" />
+                 Report Post
               </div>
             </div>
         </div>

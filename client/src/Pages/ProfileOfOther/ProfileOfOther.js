@@ -20,6 +20,17 @@ cursor: pointer;
  background-color: #0066ff;
   }
 `;
+const Message = styled.button`
+background-color: #65d74f;
+border:none;
+color:white;
+padding: 10px 15px;
+border-radius: 50px;
+cursor: pointer;
+&:hover {
+ background-color: #33bb19;
+  }
+`;
 
 const Unfollow = styled.button`
 border:none;
@@ -58,6 +69,7 @@ useEffect(() => {
       setProfile(result?.data)
        } catch (error) {
          console.log("error is ",error.response?.data?.message);
+         navigate("/")
        }
   }
 
@@ -100,6 +112,11 @@ useEffect(() => {
           </div>
         </div>
         <div className="profile_w_right">
+
+        <Message onClick={async ()=>{
+          await instance.post("/conversations",{"receiverId":profile._id})
+          navigate("/messenger")
+        }}>Message</Message>
        
        {
 
@@ -130,8 +147,8 @@ useEffect(() => {
 
 }
 
-          <div className={`${(profile.isPrivate)?"Private_Account_badge":"Public_Account_badge"}`}>
-            <span>{`${(profile.isPrivate)?"Private":"Public"} Account`}</span>
+          <div style={{display:"flex",alignItems:"center"}} className={`${(profile.isPrivate)?"Private_Account_badge":"Public_Account_badge"}`}>
+            <span >{`${(profile.isPrivate)?"Private":"Public"} Account`}</span>
           </div>
         </div>
       </div>

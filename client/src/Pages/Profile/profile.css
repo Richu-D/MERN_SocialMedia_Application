@@ -1,6 +1,28 @@
 .profile {
     color: var(--color-primary);
   }
+  .publicAccountBtn{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    background-color: rgba(87, 87, 250, 0.866);
+    cursor: pointer;
+  }
+  .publicAccountBtn:hover{
+    background-color: blue;
+  }
+  .privateAccountBtn{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    background-color: rgba(17, 17, 17, 0.738);
+    cursor: pointer;
+  }
+  .privateAccountBtn:hover{
+    background-color: black;
+  }
   .profile_top {
     margin-top: 56px;
     box-shadow: 0 1px 2px var(--shadow-1);

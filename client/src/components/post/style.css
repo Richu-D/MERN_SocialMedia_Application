@@ -33,11 +33,12 @@
     gap: 5px;
     position: relative;
   }
-  #postEditMoreOption{
+  .postEditMoreOption{
     position: absolute;
     top: 15px;
     right: 15px;
     z-index: 1;
+  cursor: pointer;
   }
   .open_post_edit{
     background: var(--bg-primary);

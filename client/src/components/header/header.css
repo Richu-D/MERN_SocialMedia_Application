@@ -15,6 +15,36 @@ header {
     align-items: center;
     gap: 10px;
     padding: 5px 1rem;
+    position: relative;
+  }
+
+  .search_suggession{
+    position: absolute;
+    top: 55px;
+    left: 70px; 
+    width: 250px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
+  }
+  .notification{
+    position: relative;
+  }
+
+  .notification_container{
+    position: absolute;
+    top: 55px;
+    left: -260px; 
+    width: 350px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
   }
   .logo-container {
     width: 30px;
@@ -156,4 +186,110 @@ header {
   .active_link{
     background: var(--light-blue-color);
     color: var(--blue-color);
+  }
+
+  .profile_suggession_container{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .profile_suggession_container:hover{
+    background-color: #dcdcdc;
+  }
+  .profile_suggession_image img{
+    padding: 5px;
+    width: 40px;
+    border-radius: 50px;
+    margin-right: 10px;
+  }
+
+
+  .postNotificationContainer{
+    width: 100%;
+    height: 90px;
+    margin: 5px 0px;
+    padding: 5px;
+    display: flex;
+  }
+.postNotificationContainer:hover{
+  background-color: #eff5f8;
+}
+  .emiterImgAndNameContainer{
+    margin-right: 5px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .Notification_image img{
+    width: 50px;
+    border-radius: 50px;
+    margin-right: 10px;
+  }
+  
+  .profile_suggession_username{
+    color: rgb(39, 39, 39);
+  }
+  .NotificationMsg{
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.694);
+  }
+
+  .postNotificationBody{
+    width: 220px;
+    height: 80px;
+  }
+
+  .PostNotificationHeader{
+    width: 100%;
+    height: 20px;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+  }
+  /* .PostNotificationHeading{
+   
+  }
+  .NotificationTime{
+ 
+  } */
+  .NotificationTime{
+    font-size: 10px;
+  }
+  .PostNotificationContentBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+  }
+  .PostNotificationImg{
+    height: 90%;
+  }
+  .PostNotificationImg img{
+    height:100% ;
+  }
+  .PostNotificationText{
+
+  }
+
+  .hamburgerMenu{
+    display: none;
+  }
+  @media screen and (max-width: 480px) {
+    .header_right div:not(.hamburgerMenu) {
+      display: none;
+    }
+    .hamburgerMenu{
+      display: block;
+    }
+    .header_middle{
+      display: none;
+    }
+    .search input {
+      font-size: 10px;
+    }
   }
