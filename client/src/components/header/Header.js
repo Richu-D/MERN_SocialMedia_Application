@@ -40,7 +40,7 @@ import useClickOutside from "../../helpers/clickOutside";
   const socket = useRef()
   useEffect(()=>{
     socket.current = user?.socket?.current;
-    socket.current.on("getMessage", (data) => {
+    socket?.current?.on("getMessage", (data) => {
       setMsgCount(prev => prev+1)
     });
   },[])
@@ -239,7 +239,7 @@ import useClickOutside from "../../helpers/clickOutside";
           <i className="fa-solid fa-right-from-bracket"/>
         </div>
         <div className="hamburgerMenu circle_icon hover1">
-        <i class="fa-solid fa-bars"/>
+        <i className="fa-solid fa-bars"/>
         </div>
       </div>
     </header>

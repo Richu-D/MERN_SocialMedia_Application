@@ -30,7 +30,7 @@ export default function ImagePreview({
           <div id="selected-image-container">
          <img id="selected-image" alt="upload" src={URL.createObjectURL(images)} />
 
-         <i id="delete-selected-image" class="fa-solid fa-trash" onClick={()=>{
+         <i id="delete-selected-image" className="fa-solid fa-trash" onClick={()=>{
           setImages(null)
           imageInputRef.current.value = ''
           }} />
