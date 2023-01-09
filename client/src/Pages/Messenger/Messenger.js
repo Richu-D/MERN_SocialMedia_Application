@@ -196,7 +196,7 @@ recognition.start();
                   handleSubmit()
                 }
             }} value={newMessages} onChange={(e)=>setNewMessages(e.target.value)}  placeholder='type Here...'/>
-<i class="fa-solid fa-microphone" style={{color:micColor,padding:"10px"}} onClick={()=>{handleVoiceRecognition()}}></i>
+<i className="fa-solid fa-microphone" style={{color:micColor,padding:"10px"}} onClick={()=>{handleVoiceRecognition()}}></i>
 
           <button className='chatSubmitButton' onClick={handleSubmit}>Send</button>
         </div>
