@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useInstance from "../../axios/axiosInstance";
-import "./resendMail.css"
+import "./resendMail.css";
 
 const ResendMail = () => {
 
@@ -30,13 +30,18 @@ async function handleResendMail(){
     try {
     let Result = await Instance.post("/resendVerification")   
     setError("")
-    setSuccess(Result?.data?.message);
+    setSuccess(Result?.data?.message); 
     setResetCounter(prev => !prev)
         
     } catch (error) {
         console.log(error?.response?.data?.message,"error");
         setSuccess("");
         setError(error?.response?.data?.message)
+        if(error?.response?.data?.message==="This account is already activated."){
+            setTimeout(()=>{
+                window.location.reload()
+            },2500)
+        }
     }
     
 }

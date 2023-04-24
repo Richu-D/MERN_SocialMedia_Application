@@ -103,7 +103,11 @@ import useClickOutside from "../../helpers/clickOutside";
               // console.log(eachUser);
           return  (<div key={eachUser?._id} onClick={()=>{navigate(`/profile/${eachUser?.username}`)}} className="profile_suggession_container">
             <div className="profile_suggession_image">
-              <img src={eachUser?.picture||default_profile} alt="" srcset="" />
+              <img src={eachUser?.picture}
+              onError={(e) => {
+                e.target.src = default_profile;
+              }}
+              alt="" srcset="" />
             </div>
             <div className="profile_suggession_username">{eachUser?.username}</div>
            </div>)
@@ -139,7 +143,11 @@ import useClickOutside from "../../helpers/clickOutside";
       </div>
       <div className="header_right">
       <Link to="/profile" className={`profile_link hover1 ${page === "profile" ? "active_link" : ""}`}>
-          <img src={user?.picture ||default_profile} alt="Profile" />
+          <img src={user?.picture}
+          onError={(e) => {
+            e.target.src = default_profile;
+          }}
+          alt="Profile" />
           <span>{user?.username}</span>
         </Link>
         
@@ -171,7 +179,11 @@ import useClickOutside from "../../helpers/clickOutside";
             <div className="Notification_image">
               <img 
                onClick={()=>{navigate(`/profile/${eachNotification?.emiterId?.username}`)}}
-              src={eachNotification?.emiterId?.picture||default_profile} alt="" srcset="" />
+              src={eachNotification?.emiterId?.picture} 
+              onError={(e) => {
+                e.target.src = default_profile;
+              }}
+              alt="" srcset="" />
             </div>
             <div className="profile_suggession_username">{eachNotification?.emiterId?.username}</div>
             </div>

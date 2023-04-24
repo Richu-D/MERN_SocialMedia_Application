@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema(
     picture: {
       type: String,
       trim: true,
-      default:null,
+      default:"https://firebasestorage.googleapis.com/v0/b/colormedia-b59a3.appspot.com/o/profile%2Fdefault_profile.png?alt=media&token=54f34a5a-e7cb-49c6-b62f-a914fb895955",
     },
     cover: {
       type: String,

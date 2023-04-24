@@ -30,7 +30,11 @@ async function fetchData(){
     <div className="comment_box">
         <div className='commenter_header'>
         <div className='commenter_profile'>
-        <img src={userdetails.picture||defaultProfilePic} alt="profile" />
+        <img src={userdetails.picture}
+        onError={(e) => {
+            e.target.src = defaultProfilePic;
+          }}
+        alt="profile" />
         <span>{userdetails.username}</span> 
         <Moment fromNow interval={30}>
                 {comment.commentAt} 

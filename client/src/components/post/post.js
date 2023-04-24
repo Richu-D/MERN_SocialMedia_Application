@@ -95,7 +95,11 @@ function handleEdit(){
         <Link
           to={`/profile/${post.user.username}`}
           className="post_header_left">
-          <img src={post?.user?.picture||defaultProfile} alt="" />
+          <img src={post?.user?.picture}
+          onError={(e) => {
+            e.target.src = defaultProfile;
+          }}
+          alt="post profile" />
           <div className="header_col">
             <div className="post_profile_name">
               {post.user.username}

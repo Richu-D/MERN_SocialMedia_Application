@@ -40,14 +40,19 @@ export default function ProfielPictureInfos({setReloadPost}) {
       <div className="profile_img_wrap">
          {show && <ProfilePicture setReloadPost={setReloadPost}  setShow={setShow}/>}
         <div className="profile_w_left">
-          <div className="profile_w_img">
-            <div
+          <div className="profile_w_img"> 
+            <img
               className="profile_w_bg"
               style={{
                 backgroundSize: "cover",
-                backgroundImage: `url(${user?.picture||defaultProfilePic})`,
+                display:"block"
               }}
-            ></div>
+              src={user?.picture}
+              onError={(e) => {
+                e.target.src = defaultProfilePic;
+              }}
+              alt="profile"
+            />
             <div className="profile_circle hover1" onClick={()=>{setShow(prev => !prev)}}>
               <i className="fa-solid fa-camera" />
             </div>

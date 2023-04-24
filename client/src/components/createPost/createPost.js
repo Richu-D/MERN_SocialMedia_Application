@@ -13,7 +13,11 @@ export default function CreatePost({setReloadPost}) {
    {(postVisiblity)?<CreatePostPopup setReloadPost={setReloadPost} setPostVisiblity={setPostVisiblity} user={user}/>:null} 
     <div className="createPost">
       <div className="createPost_header">
-        <img src={(user?.picture)||defaultProfilePic} alt="profile" />
+        <img src={(user?.picture)}
+        onError={(e) => {
+          e.target.src = defaultProfilePic;
+        }}
+        alt="profile" />
         <div className="open_post hover2" onClick={()=>{setPostVisiblity(true)}}>
           What's on your mind, {user?.first_name}
         </div>

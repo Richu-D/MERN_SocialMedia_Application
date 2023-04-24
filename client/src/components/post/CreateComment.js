@@ -66,7 +66,11 @@ export default function CreateComment({post,setReloadPost,setShowComment}) {
   return (
     <div className="create_comment_wrap">
       <div className="create_comment">
-        <img src={user?.picture||defaultProfilePic} alt="" />
+        <img src={user?.picture}
+        onError={(e) => {
+          e.target.src = defaultProfilePic;
+        }}
+        alt="command profile" />
         <div className="comment_input_wrap">
           {picker && (
             <div className="comment_emoji_picker">

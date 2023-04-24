@@ -28,7 +28,11 @@ useEffect(() => {
 
   return (
     <div className="conversation">
-        <img src={user?.picture||defaultImg} alt="" className="conversationImg" />
+        <img src={user?.picture}
+        onError={(e) => {
+          e.target.src = defaultImg;
+        }}
+         alt="" className="conversationImg" />
         <span className="conversationName">{user?.username}</span>
     </div>
   )

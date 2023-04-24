@@ -72,7 +72,11 @@ if(text||images) {
         </div>
           <BarLoader color="#1876f2" loading={loading} width={"100%"} size={50} />
         <div className="box_profile">
-          <img src={user?.picture||defaultPicture} alt="Profile" className="box_profile_img" />
+          <img src={user?.picture}
+          onError={(e) => {
+            e.target.src = defaultPicture;
+          }}
+          alt="Profile" className="box_profile_img" />
         
             <div className="box_profile_name">
               {user.first_name} {user.last_name}

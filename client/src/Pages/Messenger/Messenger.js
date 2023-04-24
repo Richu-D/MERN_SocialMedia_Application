@@ -24,7 +24,7 @@ const Messenger = () => {
 
   useEffect(()=>{
     socket.current = user?.socket?.current;
-    socket.current.on("getMessage", (data) => {
+    socket.current?.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -43,8 +43,8 @@ const Messenger = () => {
 
 useEffect(() => {
   console.log(user.id);
-  socket.current.emit("addUser",user.id)
-  socket.current.on("getUsers",users=>{
+  socket.current?.emit("addUser",user.id)
+  socket.current?.on("getUsers",users=>{
     setOnlineUsers(users);
   })
 }, [user])

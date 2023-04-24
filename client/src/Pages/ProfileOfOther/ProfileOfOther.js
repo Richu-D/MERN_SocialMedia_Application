@@ -92,13 +92,18 @@ useEffect(() => {
       <div className="profile_img_wrap">
         <div className="profile_w_left">
           <div className="profile_w_img">
-            <div
+            <img
               className="profile_w_bg"
               style={{
                 backgroundSize: "cover",
-                backgroundImage: `url(${profile?.picture||defaultProfilePic})`,
+                display:"block"
               }}
-            ></div>
+              src={profile?.picture}
+              onError={(e) => {
+                e.target.src = defaultProfilePic;
+              }}
+              alt="profile"
+            />
           </div>
           <div className="profile_w_col">
             <div className="profile_name">
